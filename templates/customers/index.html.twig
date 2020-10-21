@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customers!{% endblock %}
+
+{% block body %}
+    <style>
+        .green{
+            background-color: forestgreen;
+        }
+        .orange{
+            background-color: orange;
+        }
+        .red{
+            background-color: red;
+        }
+        .table{
+            font-size: 8pt;
+            font-family: Arial;
+
+        }
+        .table td {
+            padding: 4px;
+        }
+    </style>
+
+    <table class="table">
+        <tr>
+            <th>Customer Name</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th>Order count</th>
+        </tr>
+        {% for customer in customers %}
+        <tr class="{{ orders[customer.customerId].colour }}">
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.customerStatus.name }}</td>
+            <td>${{ orders[customer.customerId].total|number_format(2, '.', ',') }}</td>
+            <td>{{ orders[customer.customerId].count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
